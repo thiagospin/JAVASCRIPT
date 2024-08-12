@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // JSON.STRINGFY() versus JSON.PARSE()
+        const var_string = '{"result":true, "count":42, "status":"fail"}';
+        console.log(typeof(JSON.parse(var_string)));
+        console.log(JSON.parse(var_string));
+        // ler propriedade específica
+        // console.log(JSON.parse(var_string).status);
+
+
+        // leitura de um arquivo JSON com fetch e promise
+        fetch('./assets/db_livros.json')
+            .then( response => {
+                console.log(`Status da chamada: ${response.status} Detalhes: ${response.statusText}`)
+                return response.text();
+            })
+            .then( txt => {
+                // aqui eu pego o objeto convertido (JSON)
+                const objeto = JSON.parse(txt);
+                console.log(objeto);
+
+                // se quiser voltar para texto, caminho inverso
+                const texto = JSON.stringify(objeto);
+                console.log(texto)
+
+                // recuperando o array que está dentro do objeto
+                const array_livros = objeto.livros;
+                console.log(array_livros);
+                
+                // varrendo o array e lendo alguma propriedade específica
+                for (i = 0; i < array_livros.length; i++) {
+                    console.log(array_livros[i].titulo);
+                }
+
+                // varredura usando for each
+                array_livros.forEach(item => {
+                    console.log(`Título: ${item.titulo}`);
+                });
+
+                // KEYS conhecendo todas as chaves de um objeto
+                console.log(Object.keys(array_livros[0]));
+            })
+            .catch(erro => {
+                console.log("O catch não pega erros 404...")
+                console.log(erro)
+            })
+
+    </script>
+</body>
+</html>
