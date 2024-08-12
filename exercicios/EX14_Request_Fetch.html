@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button type="button" onclick="executaReq()">
+        Requisição dentro de função assíncrona
+      </button>
+      <button type="button" onclick="executaReqThen()">
+        Requisição usando o .then
+      </button>
+    </div>
+    <div>
+        <select id="personagens">
+            <option>Escolha...</option>
+        </select>
+    </div>
+
+    <script>
+      async function executaReq() {
+        const url = "https://swapi.dev/api/" + "films/1/";
+
+        try {
+          const response = await fetch(url);
+          const dados = await response.json();
+          // console.log(JSON.stringify(dados));
+
+          console.log(dados.characters[1]);
+
+          for(var i = 0; i < dados.characters.length; i++) {
+            var elemento = document.createElement("option");
+            elemento.textContent = dados.characters[i];
+            elemento.value = dados.characters[i];
+            document.getElementById("personagens").appendChild(elemento);
+          }
+        } catch (erro) {
+          console.log(erro);
+        } finally {
+          console.log("Requisição Finalizada.");
+        }
+      }
+
+      function executaReqThen() {
+        const url = "https://api.github.com/users/thiagospin";
+        const url_lenta = "https://httpbin.org/delay/10";
+
+        // usando promise com .then, podemos também usar o catch
+        // e não precisamos colocar o FETCH dentro de função assync
+        // fetch(url)
+        //   .then((response) => response.json())
+        //   .then((json) => console.log(json))
+        //   .catch((erro) => console.log(erro));
+
+        // outra forma de entender as promises...
+        // const fetchPromise = fetch(url);
+        // console.log(fetchPromise);
+
+        // fetchPromise.then((resposta) => {
+        //   console.log(`Resposta recebida: ${resposta.status}`);
+        // });
+
+        // console.log("Requisição finalizada…");
+
+        // promise all
+        Promise.all(
+          [
+          fetch(url_lenta).then( r => { 
+            console.log(r)
+            console.log("Finalizou API lenta.")
+          }),
+
+          fetch(url).then(r => { 
+            console.log(r);
+            console.log("Finalizou api GITHUB.")
+           })
+          ]
+        ).then(console.log(`Todas as promises foram finalizadas` ));
+
+      }
+    </script>
+  </body>
+</html>
