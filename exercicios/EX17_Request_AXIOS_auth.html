@@ -10,19 +10,27 @@
 </head>
 <body>
     
+    <!-- Se for uma imagem... -->
     <img id="imagem"></img>
+
+    <!-- Se for um vídeo... -->
+    <iframe width="420" height="315" id="videoURL" frameborder="0"></iframe>
 
     <script>
 
-        const access_token = 'HWwR8HwCnIAP3zTcfcy4UndHAIRSaaM6hehhEdqg'
-        var url = `https://api.nasa.gov/planetary/apod?api_key=${access_token}` 
-        
+        const apiBaseURL = `https://api.nasa.gov/planetary/apod`
+        const access_token = `QW7GmcQz2ayPdeZFZCoLdibgFunavsHQlJV9jbJP`
+        const dataImagem = '2024-08-25'
 
-        axios.get(url)
+        var urlGet = apiBaseURL + '?api_key=' + access_token
+        var urlGetByDate = apiBaseURL + '?api_key=' + access_token + '&date=' + dataImagem 
+
+        axios.get(urlGetByDate)
             .then(function (response) {
                 const refImagem = response.data.url;
-                //console.log(refImagem)
+                // console.log(refImagem)
                 document.getElementById("imagem").src = refImagem;
+                document.getElementById("videoURL").src = refImagem;
             })
             .catch((erro) => console.log(erro))
 
