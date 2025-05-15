@@ -9,27 +9,26 @@
     <div>
         <!-- <select id="combo" onchange="consultar()"> -->
         <select id="combo">
-            <option value="1" name="Fox">Polo 1.0</option>
-            <option value="2" name="Virtus">Virtus 1.4 Flex</option>
-            <option value="3" name="Nivus">Nivus 1.4 Flex</option>
-            <option value="4" name="Jetta">Jetta TSi</option>
-            <option value="5" name="Amarok">Amarok Turbo Diesel</option>
+            <option value="1">Polo 1.0</option>
+            <option value="2">Virtus 1.4 Flex</option>
+            <option value="3">Nivus 1.4 Flex</option>
+            <option value="4">Jetta TSi</option>
+            <option value="5">Amarok Turbo Diesel</option>
         </select>
     </div>
 
     <script>
 
+        document.getElementById("combo").addEventListener("change", consultar);
+
         function consultar() {
             var opcao = document.getElementById("combo");
             console.log(opcao.value)
-            console.log(opcao.name)
             
             // se quiser recuperar o texto da opção
             console.log(opcao.options[opcao.value].innerHTML)
         }
 
-        document.getElementById("combo").addEventListener("change", consultar);
-
-    </script>
+</script>
 </body>
 </html>
