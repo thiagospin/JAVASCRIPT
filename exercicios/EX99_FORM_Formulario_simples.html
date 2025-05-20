@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Simples</title>
+</head>
+<body>
+        <div style="padding: 20px; background-color: beige; border-radius: 10px; width: 50%; display: flex; justify-content: center;">
+            <form id="formularioLogin">
+                <fieldset style="border-radius: 10px;">
+                    <legend>DADOS DO USUÁRIO</legend>
+                    <div style="padding: 20px;">
+                        <label>e-mail</label>
+                        <!-- preciso atribuir name para recuperar no evento -->
+                        <input id="email" name="email" type="email" required>
+                    </div>
+                    <div style="padding: 20px;">
+                        <label id="senha">senha</label>
+                        <!-- preciso atribuir name para recuperar no evento -->
+                        <input name="senha" type="password">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <button id="btnLimpar" type="reset">LIMPAR</button>
+                    <button id="btnLogar" type="submit">LOGIN</button>
+                </fieldset>
+            </form>
+        </div>
+</body>
+
+<script>
+    document.getElementById("formularioLogin").addEventListener("submit", submeter);
+    document.getElementById("formularioLogin").addEventListener("reset", resetar);
+    document.getElementById("formularioLogin").addEventListener("change", mudar);
+    document.getElementById("formularioLogin").addEventListener("input", inputar);
+    document.getElementById("email").addEventListener("focus", focar);
+    document.getElementById("email").addEventListener("blur", desfocar);
+
+    function submeter(event) {
+        event.preventDefault();
+        console.log("Dados enviados:");
+        console.log(`usuário: ${event.target.email.value}`);
+        console.log(`senha: ${event.target.senha.value}`);
+    }
+
+    function resetar() {
+        console.log("Dados resetados.");
+    }
+
+    function mudar() {
+        console.log("Valor de campo alterado.");
+    }
+
+    function inputar() {
+        console.log("Caracter digitado no campo.");
+    }
+
+    function focar() {
+        console.log("Campo ganhou foco.");
+    }
+
+    function desfocar() {
+        console.log("Campo perdeu foco.");
+    }
+
+
+</script>
+</html>
