@@ -4,76 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário Completo</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .div-centralizada {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+        }
+
+        .rotulo {
+            width: 200px;
+            border-radius: 5px;
+            height: 30px;
+            min-width: 200px;
+        }
+
+        .fieldset-externo {
+            border-radius: 10px; 
+            margin-top: 20px;
+        }
+
+        .fieldset-turno {
+            border-radius: 10px;
+            width: 400px;
+            /* text-align: center; */
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 10px;
+        }
+
+        .cb {
+            width: 50px;
+        }
+
+        .rotulo-cb {
+            width: 400px;
+        }
+        
+        .ta {
+            width: 90%;
+            height: 80px;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 150px;
+            border-radius: 5px;
+            height: 25px;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
     <div style="background-color: beige; border-radius: 10px; padding: 20px;">
         <form id="avaliacaoAluno">
             <h1>Formulário de Avaliação de Aluno</h1>
-            <fieldset style="border-radius: 10px;">
+            <fieldset class="fieldset-externo">
                 <legend>Dados do Aluno</legend>
-                <p>
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome">
-                    <label for="matricula">Matrícula</label>
-                    <input type="number" name="matricula" id="matricula">
-                </p>
-                <p>
-                    <label for="ano">Ano</label>
-                    <input type="text" name="ano" id="ano">
-                    <label for="turma">Turma</label>
-                    <select name="turma" id="turma" style="width: 80px;">
-                        <option value="151">151</option>
-                        <option value="251">251</option>
-                        <option value="351">351</option>
-                        <option value="1151">1151</option>
-                        <option value="2251">2251</option>
-                        <option value="3351">3351</option>
-                    </select>
-                </p>
-                <p>
-                    <fieldset style="width: 30%; border-radius: 10px;">
+                
+                    <div class="div-centralizada">
+                        <label class="rotulo" for="nome">Nome</label>
+                        <input class="rotulo" type="text" name="nome" id="nome">
+                    </div>
+                    <div class="div-centralizada">
+                        <label class="rotulo" for="matricula">Matrícula</label>
+                        <input class="rotulo" type="number" name="matricula" id="matricula">
+                    </div>
+                
+                    <div class="div-centralizada">
+                        <label class="rotulo" for="ano">Ano</label>
+                        <input class="rotulo" type="text" name="ano" id="ano">
+                    </div>
+                    <div class="div-centralizada">
+                        <label class="rotulo" for="turma">Turma</label>
+                        <select class="rotulo" name="turma" id="turma" style="width: 80px;">
+                            <option value="151">151</option>
+                            <option value="251">251</option>
+                            <option value="351">351</option>
+                            <option value="1151">1151</option>
+                            <option value="2251">2251</option>
+                            <option value="3351">3351</option>
+                        </select>
+                    </div>
+                <div class="div-centralizada">
+                    <fieldset class="fieldset-turno">
                         <legend>Turno</legend>
-                        <input type="radio" name="turno" value="manha" id="manha">
-                        <label for="manha">manhã</label>
-                        <input type="radio" name="turno" value="tarde" id="tarde">
-                        <label for="tarde">tarde</label>
-                        <input type="radio" name="turno" value="noite" id="noite">
-                        <label for="noite">noite</label>
+                        <p>
+                            <input type="radio" name="turno" value="manha" id="manha">
+                            <label for="manha">manhã</label>
+                        </p>
+                        <p>
+                            <input type="radio" name="turno" value="tarde" id="tarde">
+                            <label for="tarde">tarde</label>
+                        </p>
+                        <p>
+                            <input type="radio" name="turno" value="noite" id="noite">
+                            <label for="noite">noite</label>
+                        </p>
                     </fieldset>
-
-                </p>
+                </div>
             </fieldset>
-            <fieldset style="border-radius: 10px; padding: 20px;">
+            <fieldset class="fieldset-externo">
                 <legend>Dados Informados pelo Professor</legend>
-                <p>
-                    <label for="professor">Professor</label>
-                    <input type="text" name="professor" id="professor">
-                    <label for="data">Data</label>
-                    <input type="date" name="data" id="data">
-                </p>
-                <p>
-                    <p>
-                        <input type="checkbox" name="frequencia" id="frequencia">
-                        <label for="frequencia">Aluno teve boa frequência</label>
-                    </p>
-                    <p>
-                        <input type="checkbox" name="comportamento" id="comportamento">
-                        <label for="comportamento">Aluno teve bom comportamento</label>
-                    </p>
-                    <p>
-                        <input type="checkbox" for="evolucao">
-                        <label for="evolucao" id="evolucao">Aluno teve boa evolução</label>
-                    </p>
-                </p>
+                <div class="div-centralizada">
+                    <label class="rotulo" for="professor">Professor</label>
+                    <input class="rotulo" type="text" name="professor" id="professor">
+                </div>
+                <div class="div-centralizada">
+                    <label class="rotulo" for="data">Data</label>
+                    <input class="rotulo" type="date" name="data" id="data">
+                </div>
+                <div class="div-centralizada">
+                    <input class="cb" type="checkbox" name="frequencia" id="frequencia">
+                    <label class="rotulo-cb" for="frequencia">Aluno teve boa frequência</label>
+                </div>
+                <div class="div-centralizada">
+                    <input class="cb" type="checkbox" name="comportamento" id="comportamento">
+                    <label class="rotulo-cb" for="comportamento">Aluno teve bom comportamento</label>
+                </div>                    
+                <div class="div-centralizada">
+                    <input class="cb" type="checkbox" for="evolucao">
+                    <label class="rotulo-cb" for="evolucao" id="evolucao">Aluno teve boa evolução</label>
+                </div>
+                
             </fieldset>
-            <fieldset style="border-radius: 10px; padding: 20px;">
+            <fieldset class="fieldset-externo">
                 <legend>Observações</legend>
-                <textarea name="obs" id="obs" style="width: 50%; height: 100px;"></textarea>
+                <div class="div-centralizada">
+                    <textarea name="obs" id="obs" class="ta"></textarea>
+                </div>
             </fieldset>
-            <fieldset style="border-radius: 10px; padding: 20px;">
+            <fieldset class="fieldset-externo">
                 <legend>Finalizar</legend>
-                <button id="limpar" type="reset">Limpar Dados</button>
-                <button id="enviar" type="submit">Enviar Avaliação</button>
+                <div class="div-centralizada">
+                    <button class="btn" id="limpar" type="reset">Limpar Dados</button>
+                    <button class="btn" id="enviar" type="submit">Enviar Avaliação</button>
+                </div>
             </fieldset>
         </form>
     </div>
@@ -81,7 +152,6 @@
     <script>
         document.getElementById("avaliacaoAluno").addEventListener("submit", enviarDados);
         document.getElementById("avaliacaoAluno").addEventListener("reset", limparFormulario);
-
 
         function enviarDados(event) {
             
