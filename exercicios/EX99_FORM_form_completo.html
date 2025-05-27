@@ -164,6 +164,18 @@
             console.log(`Turno: ${event.target.turno.value}`);                      // diferenciando os valores
             console.log(`Frequência: ${event.target.frequencia.checked}`);          // nos checkboxes usamos o atributo "checked"
             console.log(`Comportamento: ${event.target.comportamento.checked}`);    // nos checkboxes usamos o atributo "checked"
+        
+            // converter dados do formulário em JSON
+            var form = document.getElementById("avaliacaoAluno");
+
+            var formData = new FormData(form);
+            var objeto = {};
+            
+            formData.forEach(function(valor, chave) {
+                objeto[chave] = valor;
+            });
+        
+            console.log(objeto);
         }
 
         function limparFormulario() {

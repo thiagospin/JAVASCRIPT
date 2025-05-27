@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importação arquivo JSON</title>
+  </head>
+  <body>
+    <div style="display: flex; align-items: top; padding: 10px">
+      <label for="dados" style="margin: 10px">Insira aqui seus dados</label>
+      <textarea
+        name="dados"
+        id="dados"
+        style="width: 30%; height: 200px; margin: 10px"
+      >{ "nome": "Thiago", "idade": "44" }
+    </textarea
+      >
+    </div>
+    <div>
+      <button id="btn">Cadastrar</button>
+    </div>
+
+    <div>
+      <label for="nome">Nome</label>
+      <input type="text" name="nome" id="nome" />
+      <label for="idade">Idade</label>
+      <input type="text" name="idade" id="idade" />
+    </div>
+
+    <script>
+      document.getElementById("btn").addEventListener("click", cadastrar);
+
+      function cadastrar() {
+        conteudo = document.getElementById("dados").value;
+        console.log(conteudo);
+        console.log(typeof conteudo);
+
+        conteudoJSON = JSON.parse(conteudo);
+        console.log(conteudoJSON);
+        console.log(typeof conteudoJSON);
+
+        document.getElementById("nome").value = conteudoJSON.nome;
+        document.getElementById("idade").value = conteudoJSON.idade;
+      }
+    </script>
+  </body>
+</html>
