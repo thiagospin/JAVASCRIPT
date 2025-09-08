@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Content Delivery Network - Local para referenciar a lib do AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <script>
+      console.log("Iniciando Programa");
+
+        // executarAPIFetch();
+      executarAPIAxios();
+
+      console.log("Terminando Programa");
+
+      // FUNÇÕES
+      // FETCH precisa estar dentro de uma função assíncrona
+      // AXIOS é baseado em promise, então não precisa
+
+      async function executarAPIFetch() {
+        console.log("Executando requisicao API com FETCH (Assíncrono)");
+
+        url = `http://viacep.com.br/ws/22793105/json`;
+
+        const response = await fetch(url);
+        const dados = await response.json();
+        console.log(JSON.stringify(dados));
+
+        console.log("Requisição FETCH Finalizada.");
+      }
+
+      function executarAPIAxios() {
+        console.log("Executando requisicao API com AXIOS (Assíncrono)");
+        var url = `http://viacep.com.br/ws/22793105/json`;
+
+        axios
+          .get(url)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((e) => console.log(e.code));
+
+        console.log("Requisição AXIOS Finalizada.");
+      }
+    </script>
+  </body>
+</html>
