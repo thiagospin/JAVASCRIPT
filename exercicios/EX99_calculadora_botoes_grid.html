@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container bg-light p-4 mt-4 rounded">
+        <h1>Calculadora do Ratão</h1>
+        <div class="row">
+            <div class="col-12">
+                <input type="text" class="form-control" id="display" placeholder="0" readonly>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col col-3"><button class="btn btn-primary w-25">7</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25">8</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25" onclick="adicionarNumero('9')">9</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25" onclick="adicionarOperacao('/')">/</button></div>
+        </div>
+        <div class="row m-2">
+            <div class="col col-3"><button class="btn btn-primary w-25">4</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25">5</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25">6</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25" onclick="adicionarOperacao('*')">*</button></div>
+        </div>
+        <div class="row m-2">
+            <div class="col col-3"><button class="btn btn-primary w-25">1</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25">2</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25">3</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25" onclick="adicionarOperacao('-')">-</button></div>
+        </div>
+        <div class="row m-2">
+            <div class="col col-3"><button class="btn btn-primary w-25">0</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25">.</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25">=</button></div>
+            <div class="col col-3"><button class="btn btn-primary w-25" onclick="adicionarOperacao('+')">+</button></div>
+        </div>
+    </div>
+
+    <script>
+        
+        function adicionarNumero(numero) {
+            var display = document.getElementById("display");
+            display.value = display.value + numero;
+        }
+
+        function ehOperador(caractere) {
+            if (caractere === "+") {
+                return true;
+            }
+
+            if (caractere === "-") {
+                return true;
+            }
+
+            if (caractere === "*") {
+                return true;
+            }
+
+            if (caractere === "/") {
+                return true;
+            }
+
+            return false;
+        }
+
+        function adicionarOperacao(operacao) {
+            var display = document.getElementById("display");
+            var valorAtual = display.value;
+
+            if (valorAtual === "") {
+                return;
+            }
+
+            var ultimoCaractere = valorAtual.charAt(valorAtual.length - 1);
+
+            if (ehOperador(ultimoCaractere)) {
+                display.value = valorAtual.substring(0, valorAtual.length - 1) + operacao;
+                return;
+            }
+
+            display.value = valorAtual + operacao;
+        }
+        
+    </script>
+</body>
+</html>
