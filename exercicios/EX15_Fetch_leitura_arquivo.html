@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrindo arquivos com FETCH</title>
+</head>
+<body>
+    <h1>Leitura de arquivo JSON com Fetch</h1>
+
+    <button onclick="carregarLivros()">Carregar livros</button>
+    <br>
+    <button onclick="carregarDropdown()">Carregar Dropdown</button>
+    <br>
+    <select name="optLivros" id="optLivros">
+
+    </select>
+
+    <pre id="saida">Clique no botão para carregar o arquivo assets/db_livros.json</pre>
+
+    <script>
+
+        var dadosJSON = {}
+        var dadosTexto = ''
+
+        async function carregarLivros() {
+            try {
+                const resposta = await fetch("assets/db_livros.json");
+
+                // só será executado se der algum erro na request acima
+                if (!resposta.ok) {
+                    throw new Error(`Erro HTTP: ${resposta.status}`);
+                }
+
+                dadosJSON = await resposta.json();
+                
+                // Aqui temos um formato JSON
+                console.log(dadosJSON)
+
+                // Aqui temos texto puro
+                dadosTexto = JSON.stringify(dadosJSON)
+                               
+                document.getElementById("saida").innerHTML = dadosTexto
+
+            } catch (erro) {
+                document.getElementById("saida").textContent = `Falha ao ler o arquivo: ${erro.message}`;
+            }
+        }
+
+        function carregarDropdown() {
+
+            dadosJSON.livros.forEach(l => {
+
+                // console.log(l)
+
+                opcao = document.createElement("option")
+
+                opcao.innerHTML = l.titulo
+
+                document.getElementById("optLivros").appendChild(opcao)
+                
+            });
+            document.createElement
+        }
+    </script>
+</body>
+</html>
