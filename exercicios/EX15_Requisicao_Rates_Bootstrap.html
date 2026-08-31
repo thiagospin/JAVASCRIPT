@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversão de Moedas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!-- não preciso mais das tags <br> -->
+    
+    <div class="container bg-light p-4 rounded-3">
+      
+      <h2 class="display-6 text-center">Conversão de Moedas <span class="badge text-bg-secondary">novidade!</span></h2>
+
+      <label class="form-label">Valor Origem</label>
+      <input class="form-control" id="valorigem" type="number" />
+
+      <label class="form-label mt-3">Moeda de Origem</label>
+      <select id="origem" class="form-select">
+        <option value="USD" selected>USD</option>
+        <option value="BRL">BRL</option>
+        <option value="EUR">EUR</option>
+        <option value="CAD">CAD</option>
+        <option value="GBP">GBP</option>
+      </select>
+
+      <label class="form-label mt-3">Moeda de Destino</label>
+      <select id="destino" class="form-select">
+        <option value="USD">USD</option>
+        <option value="BRL" selected>BRL</option>
+        <option value="EUR">EUR</option>
+        <option value="CAD">CAD</option>
+        <option value="GBP">GBP</option>
+      </select>
+
+      <div class="text-center">
+        <button
+          class="btn btn-outline-primary mt-3 btn-lg"
+          onclick="converter()"
+        >
+          CONVERTER
+        </button>
+      </div>
+
+      <label class="form-label mt-3">Valor Destino</label>
+      <input class="form-control" id="valdestino" type="number" disabled />
+    </div>
+
+    <script>
+      function converter() {
+        origem = document.getElementById("origem").value;
+        destino = document.getElementById("destino").value;
+
+        baseURL = "https://allratestoday.com";
+
+        endpoint = `/api/v1/rates?source=${origem}&target=${destino}`;
+
+        url = `${baseURL}${endpoint}`;
+
+        key = "art_live_CowPC77n07PHGLFbtLP62h1P43m1AXo8";
+
+        fetch(url, {
+          headers: {
+            Authorization: `Bearer ${key}`,
+          },
+        })
+          .then((resposta) => {
+            return resposta.json();
+          })
+          .then((dados) => {
+            console.log(dados);
+            console.log(dados[0].rate);
+
+            valorOrigem = document.getElementById("valorigem").value;
+
+            valorDestino = valorOrigem * dados[0].rate;
+            document.getElementById("valdestino").value = valorDestino;
+          });
+      }
+    </script>
+  </body>
+</html>

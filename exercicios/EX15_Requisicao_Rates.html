@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversão de Moedas</title>
+  </head>
+  <body>
+    <label>Valor Origem</label>
+    <input id="valorigem" type="number"/>
+    <br>
+    <label>Moeda de Origem</label>
+    <input id="origem" type="text" maxlength="3" />
+    <br />
+    <label>Moeda de Destino</label>
+    <input id="destino" type="text" maxlength="3" />
+    <br />
+    <button onclick="converter()">CONVERTER</button>
+    <br>
+    <label>Valor Destino</label>
+    <input id="valdestino" type="number" disabled>
+
+    <script>
+      function converter() {
+        origem = document.getElementById("origem").value;
+        destino = document.getElementById("destino").value;
+
+        baseURL = "https://allratestoday.com";
+
+        endpoint = `/api/v1/rates?source=${origem}&target=${destino}`;
+
+        url = `${baseURL}${endpoint}`;
+
+        key = "art_live_CowPC77n07PHGLFbtLP62h1P43m1AXo8";
+
+        fetch(url, {
+          headers: {
+            Authorization: `Bearer ${key}`,
+          },
+        })
+            .then((resposta) => {
+                return resposta.json()
+            })
+            .then(dados => {
+                console.log(dados)
+                console.log(dados[0].rate)
+
+                valorOrigem = document.getElementById("valorigem").value
+                
+                valorDestino = valorOrigem * dados[0].rate
+                document.getElementById("valdestino").value = valorDestino
+                
+            })
+      }
+    </script>
+  </body>
+</html>
