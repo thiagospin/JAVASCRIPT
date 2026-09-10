@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora com Switch</title>
+</head>
+<body>
+    <h2>Calculadora Simples</h2>
+
+    <div>
+        <label for="numero1">Numero 1</label>
+        <input type="number" id="numero1">
+    </div>
+
+    <div>
+        <label for="numero2">Numero 2</label>
+        <input type="number" id="numero2">
+    </div>
+
+    <div>
+        <label for="operacao">Operacao</label>
+        <select id="operacao">
+            <option value="somar">Somar (+)</option>
+            <option value="subtrair">Subtrair (-)</option>
+            <option value="multiplicar">Multiplicar (*)</option>
+            <option value="dividir">Dividir (/)</option>
+        </select>
+    </div>
+
+    <div>
+        <button onclick="calcular()">Calcular</button>
+    </div>
+
+    <div>
+        <label for="resultado">Resultado</label>
+        <input type="text" id="resultado" readonly>
+    </div>
+
+    <script>
+        function calcular() {
+            var numero1 = Number(document.getElementById("numero1").value);
+            var numero2 = Number(document.getElementById("numero2").value);
+            var operacao = document.getElementById("operacao").value;
+            var resultado;
+
+            switch (operacao) {
+                case "somar":
+                    resultado = numero1 + numero2;
+                    break;
+
+                case "subtrair":
+                    resultado = numero1 - numero2;
+                    break;
+
+                case "multiplicar":
+                    resultado = numero1 * numero2;
+                    break;
+
+                case "dividir":
+                    if (numero2 == 0) {
+                        document.getElementById("resultado").value = "Nao e possivel dividir por zero";
+                        return;
+                    }
+
+                    resultado = numero1 / numero2;
+                    break;
+
+                default:
+                    document.getElementById("resultado").value = "Operacao invalida";
+                    return;
+            }
+
+            document.getElementById("resultado").value = resultado;
+        }
+    </script>
+</body>
+</html>

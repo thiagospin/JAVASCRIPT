@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio If Else - Boletim</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            margin: 24px;
+        }
+
+        .linha {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: inline-block;
+            width: 180px;
+        }
+
+        input {
+            width: 200px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid #999;
+            padding: 0 8px;
+        }
+
+        button {
+            width: 180px;
+            height: 36px;
+            border: 0;
+            border-radius: 6px;
+            background: #0b5ed7;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #resultado {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Boletim Escolar</h2>
+
+    <div class="linha">
+        <label for="nota1">Nota 1 (0 a 10)</label>
+        <input type="number" id="nota1" min="0" max="10" step="0.1">
+    </div>
+
+    <div class="linha">
+        <label for="nota2">Nota 2 (0 a 10)</label>
+        <input type="number" id="nota2" min="0" max="10" step="0.1">
+    </div>
+
+    <div class="linha">
+        <label for="faltas">Quantidade de faltas</label>
+        <input type="number" id="faltas" min="0" step="1">
+    </div>
+
+    <div class="linha">
+        <button onclick="avaliarAluno()">Avaliar Aluno</button>
+    </div>
+
+    <div class="linha">
+        <label for="resultado">Resultado</label>
+        <input type="text" id="resultado" readonly>
+    </div>
+
+    <script>
+        function avaliarAluno() {
+            var nota1 = Number(document.getElementById("nota1").value);
+            var nota2 = Number(document.getElementById("nota2").value);
+            var faltas = Number(document.getElementById("faltas").value);
+
+            var media = (nota1 + nota2) / 2;
+            var mensagem = "";
+
+            if (faltas > 10) {
+                mensagem = "REPROVADO POR FALTA";
+            } else if (media >= 7) {
+                mensagem = "APROVADO";
+            } else if (media >= 5) {
+                mensagem = "RECUPERACAO";
+            } else {
+                mensagem = "REPROVADO POR NOTA";
+            }
+
+            document.getElementById("resultado").value = mensagem + " | Media: " + media;
+        }
+    </script>
+</body>
+</html>

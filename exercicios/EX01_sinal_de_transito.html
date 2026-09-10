@@ -6,32 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    select, input {
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+    }
+
+    label {
+        display: inline-block;
+        width: 200px;
+
+    }
+
+</style>
 <body>
+    <div>
+        <label for="sinal">COR DO SINAL</label>
+        <select name="sinal" id="sinal">
+            <option value="verde">VERDE</option>
+            <option value="amarelo">AMARELO</option>
+            <option value="vermelho">VERMELHO</option>
+        </select>
+    </div>
+    <div>
+        <button onclick="verificarSinal()">
+            Verificar Sinal    
+        </button>
+    </div>
+    <div>
+        <label>RESULTADO</label>
+        <input type="text" id="resultado" readonly>
+    </div>
     
     <script>
 
-        var cor = window.prompt("Qual a cor do sinal de trânsito?")
 
-        var certeza = window.confirm("Tem certeza?") 
-
-        if (certeza == true) {
-
-            if (cor.toLowerCase() == "verde") {
-                window.alert("siga.");
-            }
-            else if (cor.toLowerCase() == 'amarelo') {
-                window.alert("atenção.");
-            }
-            else if (cor.toLowerCase() == 'vermelho') {
-                window.alert("pare.");
-            }
-            else {
-                window.alert("Cor não reconhecida.")
+        function verificarSinal() {
+            
+            var corSelecionada = document.getElementById("sinal").value
+            
+            if (corSelecionada == 'verde') {
+                document.getElementById("resultado").value = "SIGA"
             }
 
-        } else {
-            window.location.reload();
+            if (corSelecionada == 'amarelo') {
+                document.getElementById("resultado").value = "ATENÇÃO"
+            }
+
+            if (corSelecionada == 'vermelho') {
+                document.getElementById("resultado").value = "PARE"
+            }
+
+
         }
+
+        
+
+
+
+
+
+        
 
     </script>
 </body>
