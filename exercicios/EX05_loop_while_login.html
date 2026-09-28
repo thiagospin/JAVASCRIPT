@@ -20,20 +20,39 @@
           <label style="font-weight: bolder; font-family: Tahoma">senha</label>
         </div>
         <div>
-          <input type="password" style="width: 20vw; height: 5vh; border-radius: 5px; font-size: large;" />
+          <input id="senha" type="password" style="width: 20vw; height: 5vh; border-radius: 5px; font-size: large;" />
         </div>
       </div>
       <div style="text-align: center; padding: 50px">
-        <button id="bt" style="width: 10vw; height: 5vh; border-radius: 5px;">LOGIN</button>
+        <button id="bt" style="width: 10vw; height: 5vh; border-radius: 5px;"
+        onclick="logar()">LOGIN</button>
       </div>
     </div>
 
     <script>
-        document.getElementById("bt").addEventListener("click", logar);
+      const senhaCorreta = "1234";
+      let tentativas = 0;
 
-        function logar() {
-            console.log("logando...")
+      function logar() {
+        const senhaDigitada = document.getElementById("senha").value;
+
+        while (tentativas < 3 && senhaDigitada !== senhaCorreta) {
+          
+          tentativas = tentativas + 1;
+
+          if (tentativas >= 3) {
+            alert("Senha incorreta 3 vezes. Login bloqueado.");
+            document.getElementById("bt").disabled = true;
+            return;
+          }
+
+          alert("Senha incorreta. Tentativa " + tentativas + " de 3.");
+          return;
         }
+
+        alert("Login realizado com sucesso!");
+        tentativas = 0;
+      }
     </script>
 
   </body>

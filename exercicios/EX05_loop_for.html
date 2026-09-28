@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop FOR</title>
+</head>
+<body>
+    <h1>Exercício: FOR + IF</h1>
+    <p>Digite um número para listar os números pares e ímpares de 1 até ele.</p>
+
+    <label for="limite">Número:</label>
+    <input id="limite" type="number" min="1" />
+    <button id="bt">Gerar</button>
+
+    <h3>Resultado</h3>
+    <p id="resultado"></p>
+
+    <script>
+        document.getElementById("bt").addEventListener("click", gerarLista);
+
+        function gerarLista() {
+            const limite = Number(document.getElementById("limite").value);
+            const resultado = document.getElementById("resultado");
+
+            if (!limite || limite < 1) {
+                resultado.textContent = "Digite um número válido maior que 0.";
+                return;
+            }
+
+            let texto = "";
+
+            for (let i = 1; i <= limite; i++) {
+                if (i % 2 === 0) {
+                    texto += i + " é par | ";
+                } else {
+                    texto += i + " é ímpar | ";
+                }
+            }
+
+            resultado.textContent = texto;
+        }
+    </script>
+</body>
+</html>
