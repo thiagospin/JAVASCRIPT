@@ -36,7 +36,7 @@
       function logar() {
         const senhaDigitada = document.getElementById("senha").value;
 
-        while (tentativas < 3 && senhaDigitada !== senhaCorreta) {
+        while (senhaDigitada !== senhaCorreta && tentativas < 3) {
           
           tentativas = tentativas + 1;
 

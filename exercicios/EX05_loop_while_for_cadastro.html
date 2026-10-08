@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Alunos</title>
+    <style>
+      div {
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 10px;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h3>Sistema de Cadastro de Alunos</h3>
+      <p>
+        Usuário digita um nome. Ao clicar em "Cadastrar", este nome deve ser
+        inserido em um ARRAY. Você deve checar se o nome está preenchido e possui mais de 3 caracteres.
+      </p>
+      <p>
+        Este processo pode ser repetido para quantos nomes forem necessários.
+      </p>
+      <p>
+        Ao finalizar o cadastro, o usuário clica em "Finalizar" e todos os nomes
+        inseridos serão exibidos na página.
+      </p>
+    </div>
+    <div>
+      <label>Nome</label>
+      <input type="text" id="nomeAluno" />
+    </div>
+    <div>
+      <button onclick="cadastrar()">CADASTRAR</button>
+      <button onclick="finalizar()">FINALIZAR</button>
+    </div>
+    <div id="saida">
+      <h4>Alunos Cadastrados:</h4>
+    </div>
+
+    <script>
+      var listaAlunos = [];
+
+      function cadastrar() {
+
+        let nome = document.getElementById("nomeAluno").value;
+        nome = nome.trim(); // remove espaços em branco após o fim da string
+
+        listaAlunos.push(nome);
+        document.getElementById("nomeAluno").value = "";
+        document.getElementById("nomeAluno").focus();
+      }
+
+      function finalizar() {
+        
+        let itens = listaAlunos.length;
+
+        for (i = 0; i < itens; i++) {
+          let elemento = document.createElement("h6");
+          elemento.innerHTML = listaAlunos[i];
+
+          document.getElementById("saida").appendChild(elemento);
+        }
+
+      }
+    </script>
+  </body>
+</html>
