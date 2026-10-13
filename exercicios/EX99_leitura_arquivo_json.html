@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leitura de arquivo: Função Assíncrona e await Fetch</title>
+  </head>
+  <body>
+    <div>
+      <button onclick="importar()">Importar Arquivo</button>
+    </div>
+    <div id="listagem">
+
+    </div>
+
+    <script>
+    
+      // A função precisa ser assíncrona pois dentro há um await
+      async function importar() {
+
+        // o fetch retorna uma promessa, então temos que usar o await
+        const resposta = await fetch("./assets/db_livros.json");
+        
+        // o método json() também retorna uma promessa: await é necessário
+        // também poderíamos ter usado o text()
+        // const dados = await resposta.text()
+
+        const dados = await resposta.json()        
+        const listaLivros = dados['livros']
+        
+        // podemos converter o JSON em TEXT, e vice-versa
+        // var dadosTEXT = JSON.stringify(dadosJSON)
+        // var dadosJSON = JSON.parse(dadosTEXT)
+               
+        const comprimentoArray = listaLivros.length
+
+        for (i = 0; i < comprimentoArray; i++) {
+            
+            console.log(listaLivros[i])
+
+            // criando novas tags 
+            let elementoDIV = document.createElement("div")
+            let elementoH3 = document.createElement("h3")
+            let elementoP = document.createElement("p")
+            let elementoIMG = document.createElement("img")
+
+            // adicionando conteúdo dinamicamente
+            elementoH3.innerHTML = listaLivros[i].titulo
+            elementoP.innerHTML = listaLivros[i].descricao
+            elementoIMG.src = listaLivros[i].imgCapa
+
+            // dizendo onde cada tag será incluída no html
+            elementoDIV.appendChild(elementoH3)
+            elementoDIV.appendChild(elementoP)
+            elementoDIV.appendChild(elementoIMG)
+
+            document.getElementById("listagem").appendChild(elementoDIV)
+
+        }
+      }
+    </script>
+  </body>
+</html>
