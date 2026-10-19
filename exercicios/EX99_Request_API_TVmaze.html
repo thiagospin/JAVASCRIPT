@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maze - API de Filmes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              id="termo"
+            />
+            <button class="btn btn-outline-success" onclick="pesquisar()">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- GRID -->
+    <div class="row" id="linha"></div>
+
+    <script>
+      async function pesquisar() {
+        event.preventDefault();
+        let termoPesquisa = document.getElementById("termo").value;
+        let url = `https://api.tvmaze.com/search/shows?q=${termoPesquisa}`;
+
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        for (i = 0; i < dados.length; i++) {
+          let elementoDIV = document.createElement("div");
+          elementoDIV.classList.add("col");
+          elementoDIV.classList.add("p-2");
+
+        //   let elementoIMG = document.createElement("img");
+        //   elementoIMG.src = dados[i].show.image.medium;
+        //   elementoDIV.appendChild(elementoIMG);
+
+          let card = `
+            <div class="card" style="width: 18rem;">
+                <img src="${dados[i].show.image.medium}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${dados[i].show.name}</h5>
+                    <p class="card-text">${dados[i].show.summary}</p>
+                    <a href="#" class="btn btn-primary">Assistir</a>
+                </div>
+            </div>
+            `
+
+            let template = document.createElement("template")
+            template.innerHTML = card.trim()
+            let elementoCARD = template.content.firstElementChild;
+            elementoDIV.appendChild(elementoCARD)            
+
+            document.getElementById("linha").appendChild(elementoDIV);
+
+        }
+
+        console.log(dados);
+      }
+    </script>
+  </body>
+</html>
